@@ -23,7 +23,6 @@ a:hover {
   color: #e25757;
   opacity: 0.6;
   transition: 0.3s;
-  display: inline-block;
   text-decoration: none;
   cursor: pointer; }
 
@@ -74,7 +73,7 @@ a:hover {
   width: 45%;
   margin-left: 30%; }
   #page h1, #page h2 {
-    color: grey;
+    color: #d8d8d8;
     font-size: 1.3em;
     padding: 0;
     margin: 0.5em; }
@@ -82,7 +81,7 @@ a:hover {
     font-size: 1em;
     margin: 0.5em; }
   #page a {
-    font-size: 1.4em;
+    font-size: 1.0em;
     margin: 0.5em; }
   #page #sound, #page #video {
     margin-top: 100px;
