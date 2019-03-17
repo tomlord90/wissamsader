@@ -93,6 +93,10 @@ a:hover {
         font-size: 1em;
         margin: 0.5em;
     }
+    a {
+        font-size: 1.4em;
+        margin: 0.5em;
+    }
 
     #sound, #video {
         margin-top: 100px;
@@ -141,6 +145,28 @@ a:hover {
     }
     body {
         padding: 20px;
+    }
+
+    #page {
+        margin-top: 100vh;
+        margin-left: 0;
+        width: 100%;
+        h1,h2,p {
+            color: rgb(216, 216, 216);
+        }
+        h1,h2 {
+            font-size: 2em;
+        }
+        p {
+            font-size: 1.9em;
+        }
+        #sound:last-child {
+            padding-bottom: 30vh;
+        }
+    }
+    #left,#right,#home {
+        position: absolute;
+        width: 10px;
     }
 }
 

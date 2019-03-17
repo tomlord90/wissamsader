@@ -81,6 +81,9 @@ a:hover {
   #page p {
     font-size: 1em;
     margin: 0.5em; }
+  #page a {
+    font-size: 1.4em;
+    margin: 0.5em; }
   #page #sound, #page #video {
     margin-top: 100px;
     width: 100%; }
@@ -116,7 +119,22 @@ a:hover {
   #performances {
     margin-bottom: 3em; }
   body {
-    padding: 20px; } }
+    padding: 20px; }
+  #page {
+    margin-top: 100vh;
+    margin-left: 0;
+    width: 100%; }
+    #page h1, #page h2, #page p {
+      color: #d8d8d8; }
+    #page h1, #page h2 {
+      font-size: 2em; }
+    #page p {
+      font-size: 1.9em; }
+    #page #sound:last-child {
+      padding-bottom: 30vh; }
+  #left, #right, #home {
+    position: absolute;
+    width: 10px; } }
 
 @media (max-width: 668px) {
   div#bio, div#performances {
