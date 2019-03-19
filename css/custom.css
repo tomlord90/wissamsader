@@ -63,11 +63,6 @@ a:hover {
   left: 15em; }
 
 #page-bg {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 100%;
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
