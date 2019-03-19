@@ -50,7 +50,7 @@ a:hover {
   height: auto; }
 
 #home {
-  left: 10em;
+  left: 10.5em;
   top: 10em; }
 
 #left, #right {
@@ -126,9 +126,9 @@ a:hover {
     #page h1, #page h2, #page p {
       color: #d8d8d8; }
     #page h1, #page h2 {
-      font-size: 2em; }
+      font-size: 1.2em; }
     #page p {
-      font-size: 1.9em; }
+      font-size: 1em; }
     #page #sound:last-child {
       padding-bottom: 30vh; }
   #left, #right, #home {
