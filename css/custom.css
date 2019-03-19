@@ -140,3 +140,10 @@ a:hover {
     font-size: 0.8em; }
   #bio, #performances {
     margin-top: 2em; } }
+
+@media (max-width: 668px) {
+    #page-bg {
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed; }
