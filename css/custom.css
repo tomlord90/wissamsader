@@ -141,7 +141,7 @@ a:hover {
   #bio, #performances {
     margin-top: 2em; } }
 
-@media (max-width: 668px) {
+@media (max-width: 300px) {
     #page-bg {
       background-repeat: no-repeat;
       background-position: center center;
