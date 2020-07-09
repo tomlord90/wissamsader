@@ -7,13 +7,10 @@
     "doc": "doc"
   },
   "dependencies": {
-    "node-sass": "^4.11.0",
-    "sass": "^1.17.2"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "scss": "node-sass --watch scss -o css"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC"
