@@ -78,7 +78,10 @@ a:hover {
 #right {
   top: 20em;
 }
-
+#left img,
+#right img {
+  width: 55px;
+}
 #left {
   left: 10em;
 }
@@ -199,10 +202,6 @@ a:hover {
   #bio,
   #performances {
     margin-top: 2em;
-  }
-
-  .navigation-button {
-    width: 55px;
   }
 
   #page {
