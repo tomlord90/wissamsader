@@ -165,7 +165,7 @@ a:hover {
     margin-bottom: 3em;
   }
   body {
-    padding: 20px;
+    
   }
   #page {
     margin-top: 90vh;
@@ -203,6 +203,7 @@ a:hover {
   }
   #bio,
   #performances {
+    padding:10px;
     margin-top: 2em;
   }
 
