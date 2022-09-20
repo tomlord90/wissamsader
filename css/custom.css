@@ -194,6 +194,16 @@ a:hover {
     position: absolute;
     width: 10px;
   }
+  #home {
+    left: 7.5em;
+    top: 1.3em;
+  }
+  #left {
+    left: 1.1em;
+  }
+  #left, #right {
+    top: 2em;
+  }
 }
 
 @media (max-width: 668px) {
