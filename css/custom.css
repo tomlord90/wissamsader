@@ -199,7 +199,7 @@ a:hover {
 @media (max-width: 668px) {
   div#bio,
   div#performances {
-    font-size: 0.7em;
+    font-size: 0.9em;
   }
   #bio,
   #performances {
