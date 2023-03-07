@@ -184,9 +184,7 @@ a:hover .custom-word {
   }
   #performances {
     margin-bottom: 3em;
-  }
-  body {
-    
+     
   }
   #page {
     margin-top: 90vh;
@@ -225,9 +223,8 @@ a:hover .custom-word {
   #left, #right {
     top: 2em;
   }
-  #right: {
-    right: 18%;
-  }
+  
+  
 }
 
 @media (max-width: 668px) {
