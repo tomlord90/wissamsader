@@ -7,7 +7,7 @@ body {
 body {
   background: #202020;
   /*!page_container_bgcolor*/
-  font-family: "Avenir", sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .clearfix::after {
