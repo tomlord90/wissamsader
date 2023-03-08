@@ -227,7 +227,7 @@ a:hover .custom-word {
   
 }
 
-@media (max-width: 668px) {
+@media (max-width: 768px) {
   div#bio,
   div#performances {
     font-size: 0.9em;
@@ -241,4 +241,10 @@ a:hover .custom-word {
   #page {
     margin-top: 90vh;
   }
-}
+  body {
+    font-size: 13px;
+  }
+
+    
+  }
+
