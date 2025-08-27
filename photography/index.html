@@ -18,7 +18,7 @@
       position: relative;
       width: 100vw;
       height: 100vh;
-      background-image: url('images/1.webp');
+      background-image: url('images/15.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -38,7 +38,6 @@
     .nav-item {
       color: white;
       text-decoration: none;
-      padding: 1rem 2rem;
       font-size: 2rem;
       font-weight: 400;
       transition: all 0.3s ease;
@@ -55,7 +54,6 @@
       left: 0;
       right: 0;
       bottom: 0;
-      padding: 1rem 2rem;
       opacity: 0;
       pointer-events: none;
       color: white;
@@ -72,25 +70,68 @@
       text-decoration: none;
     }
 
-    .about-section {
+    .top-nav {
       position: absolute;
-      bottom: 10%;
+      top: 5%;
       left: 50%;
       transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .about-link {
+    .top-link {
       color: white;
       text-decoration: none;
-      padding: 0.5rem 1rem;
+      font-size: 2rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      position: relative;
+      white-space: nowrap;
+      cursor: default;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .bottom-link {
+      color: white;
+      text-decoration: none;
       font-size: 1rem;
       font-weight: 400;
       transition: all 0.3s ease;
+      position: relative;
+      white-space: nowrap;
     }
 
-    .about-link:hover {
-      background-color: rgba(255, 255, 255, 0.1);
+    .bottom-link::before {
+      content: attr(data-text);
+      font-weight: 700;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      pointer-events: none;
       color: white;
+      text-align: center;
+      transform: translateX(-2px);
+    }
+
+    .bottom-link:hover::before {
+      opacity: 1;
+    }
+
+    .bottom-link:hover {
+      color: rgba(255, 255, 255, 0.1);
       text-decoration: none;
     }
   </style>
@@ -109,21 +150,13 @@
  </head>
  <body>
   <div class="site-wrap">
-   <header class="site-navbar py-3" role="banner">
-    <div class="container-fluid">
-     <div class="row align-items-center">
-      <div class="col-12 text-center" data-aos="fade-down">
-       <h1 class="mb-0">
-        <a class="text-white h2 mb-0" href="index.html">
-         Wissam Sader
-        </a>
-       </h1>
-      </div>
-     </div>
-    </div>
-   </header>
    <!-- Full screen background image -->
    <div class="hero-section">
+    <!-- Top navigation with Wissam Sader -->
+    <div class="top-nav">
+     <span class="top-link">Wissam Sader</span>
+    </div>
+    
     <!-- Main navigation -->
     <nav class="main-nav">
      <a href="fashion.html" class="nav-item" data-text="Fashion">Fashion</a>
@@ -132,9 +165,9 @@
      <a href="studio.html" class="nav-item" data-text="Studio">Studio</a>
     </nav>
     
-    <!-- About link positioned near bottom -->
-    <div class="about-section">
-     <a href="about.html" class="about-link">About</a>
+    <!-- Bottom navigation with About -->
+    <div class="bottom-nav">
+     <a href="about.html" class="bottom-link" data-text="About">About</a>
     </div>
    </div>
   </div>
