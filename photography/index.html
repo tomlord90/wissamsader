@@ -9,43 +9,89 @@
   <style>
    body {
       font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
 
-    .image-wrap-2 {
+    .hero-section {
       position: relative;
-      height: 0;
-      padding-bottom: 100%;
-      overflow: hidden;
-      margin-bottom: 30px;
-    }
-
-    .image-info {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 2;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('images/1.webp');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
-    .image-info h2 {
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
-      margin-bottom: 1.5rem;
+    .main-nav {
+      min-width: 80vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .image-info .btn-outline-white {
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-      border: 2px solid rgba(255, 255, 255, 0.8);
+    .nav-item {
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      font-size: 2rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+      position: relative;
+      white-space: nowrap;
+      transition: transform 0s;
     }
 
-    .image-info .btn-outline-white:hover {
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      background: rgba(255, 255, 255, 0.1);
+    .nav-item::before {
+      content: attr(data-text);
+      font-weight: 700;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 1rem 2rem;
+      opacity: 0;
+      pointer-events: none;
+      color: white;
+      text-align: center;
+      transform: translateX(-5px);
+    }
+
+    .nav-item:hover::before {
+      opacity: 1;
+    }
+
+    .nav-item:hover {
+      color: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    .about-section {
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .about-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+      transition: all 0.3s ease;
+    }
+
+    .about-link:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      text-decoration: none;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&amp;display=swap" rel="stylesheet"/>
@@ -63,175 +109,32 @@
  </head>
  <body>
   <div class="site-wrap">
-   <div class="site-mobile-menu">
-    <div class="site-mobile-menu-header">
-     <div class="site-mobile-menu-close mt-3">
-      <span class="icon-close2 js-menu-toggle">
-      </span>
-     </div>
-    </div>
-    <div class="site-mobile-menu-body">
-     <ul class="site-nav-wrap">
-      <li class="active">
-       <a href="index.html">
-        Home
-       </a>
-      </li>
-      <li class="has-children">
-       <a href="#">
-        Portfolio
-       </a>
-       <ul class="dropdown">
-        <li>
-         <a href="fashion.html">
-          Fashion
-         </a>
-        </li>
-        <li>
-         <a href="advertising.html">
-          Advertising
-         </a>
-        </li>
-        <li>
-         <a href="studio.html">
-          Studio
-         </a>
-        </li>
-        <li>
-         <a href="video-ads.html">
-          Video Ads
-         </a>
-        </li>
-       </ul>
-      </li>
-      <li>
-       <a href="about.html">
-        About
-       </a>
-      </li>
-     </ul>
-    </div>
-   </div>
    <header class="site-navbar py-3" role="banner">
     <div class="container-fluid">
      <div class="row align-items-center">
-      <div class="col-6 col-xl-2" data-aos="fade-down">
+      <div class="col-12 text-center" data-aos="fade-down">
        <h1 class="mb-0">
         <a class="text-white h2 mb-0" href="index.html">
          Wissam Sader
         </a>
        </h1>
       </div>
-      <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" data-aos="fade-left">
-       <a class="site-menu-toggle js-menu-toggle float-right" href="#">
-        <span class="icon-menu h3">
-        </span>
-       </a>
-      </div>
-      <div class="col-10 col-md-8 d-xl-block" data-aos="fade-down">
-       <nav class="site-navigation position-relative text-right text-lg-center" role="navigation">
-        <ul class="site-menu mx-auto d-none d-lg-block">
-           <li class="active">
-          <a href="index.html">
-           Home
-          </a>
-         </li>
-         <li class="has-children">
-          <a href="#">
-           Portfolio
-          </a>
-          <ul class="dropdown">
-           <li>
-            <a href="fashion.html">
-             Fashion
-            </a>
-           </li>
-           <li>
-            <a href="advertising.html">
-             Advertising
-            </a>
-           </li>
-           <li>
-            <a href="studio.html">
-             Studio
-            </a>
-           </li>
-           <li>
-            <a href="video-ads.html">
-             Video Ads
-            </a>
-           </li>
-          </ul>
-         </li>
-         <li>
-          <a href="about.html">
-           About
-          </a>
-         </li>
-        </ul>
-       </nav>
-      </div>
      </div>
     </div>
    </header>
-   <div class="container-fluid" data-aos="fade" data-aos-delay="500">
-    <div class="row justify-content-center">
-     <!-- First row with 2 sections -->
-     <div class="col-lg-5 col-md-6 mb-4">
-      <a href="fashion.html" class="text-decoration-none">
-       <div class="image-wrap-2">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/1.webp'); background-size: cover; background-position: center;">
-        </div>
-        <div class="image-info">
-         <h2 class="mb-0 text-white">
-          Fashion
-         </h2>
-        </div>
-       </div>
-      </a>
-     </div>
-     <div class="col-lg-5 col-md-6 mb-4">
-      <a href="advertising.html" class="text-decoration-none">
-       <div class="image-wrap-2">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/9.webp'); background-size: cover; background-position: center;">
-        </div>
-        <div class="image-info">
-         <h2 class="mb-0 text-white">
-          Advertising
-         </h2>
-        </div>
-       </div>
-      </a>
-     </div>
-    </div>
-    <div class="row justify-content-center">
-     <!-- Second row with 2 sections -->
-     <div class="col-lg-5 col-md-6 mb-4">
-      <a href="video-ads.html" class="text-decoration-none">
-       <div class="image-wrap-2">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/13.webp'); background-size: cover; background-position: center;">
-        </div>
-        <div class="image-info">
-         <h2 class="mb-0 text-white">
-          Video Ads
-         </h2>
-        </div>
-       </div>
-      </a>
-     </div>
-     <div class="col-lg-5 col-md-6 mb-4">
-      <a href="studio.html" class="text-decoration-none">
-       <div class="image-wrap-2">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('images/46.webp'); background-size: cover; background-position: center;">
-        </div>
-        <div class="image-info">
-         <h2 class="mb-0 text-white">
-          Studio
-         </h2>
-        </div>
-       </div>
-      </a>
-     </div>
+   <!-- Full screen background image -->
+   <div class="hero-section">
+    <!-- Main navigation -->
+    <nav class="main-nav">
+     <a href="fashion.html" class="nav-item" data-text="Fashion">Fashion</a>
+     <a href="advertising.html" class="nav-item" data-text="Advertising">Advertising</a>
+     <a href="video-ads.html" class="nav-item" data-text="Video Ads">Video Ads</a>
+     <a href="studio.html" class="nav-item" data-text="Studio">Studio</a>
+    </nav>
+    
+    <!-- About link positioned near bottom -->
+    <div class="about-section">
+     <a href="about.html" class="about-link">About</a>
     </div>
    </div>
   </div>
