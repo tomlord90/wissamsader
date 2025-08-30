@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Fashion Editorial 2024 — Wissam Sader</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="description" content="Fashion Editorial 2024 by Wissam Sader"/>
+  <meta property="og:title" content="Fashion Editorial 2024 — Wissam Sader"/>
+  <meta property="og:description" content="Fashion Editorial 2024 by Wissam Sader"/>
+  <meta property="og:type" content="article"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      line-height: 1.4;
+      padding-bottom: 60px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 40px 20px 20px;
+    }
+
+    .header h1 {
+      font-size: 18px;
+      font-weight: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0;
+      text-decoration: underline;
+    }
+
+    .header h1 a {
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    .header h1 a:hover {
+      text-decoration: none;
+    }
+
+    /* Project Images - 2 Column Layout */
+    .project-images {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .project-images img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Footer - Sticky */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-top: 1px solid #000000;
+      z-index: 100;
+    }
+
+    .footer a {
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    .footer a:hover {
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        padding: 30px 15px 15px;
+      }
+      
+      .project-images {
+        padding: 0 15px 32px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+    }
+
+    /* Lazy loading */
+    img[loading="lazy"] {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    img[loading="lazy"].loaded {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1><a href="/">Wissam Sader</a></h1>
+  </header>
+
+  <!-- Project Images -->
+  <main class="project-images">
+    <img src="../images/1.webp" alt="Fashion Editorial 2024 - Image 1" loading="lazy">
+    <img src="../images/2.webp" alt="Fashion Editorial 2024 - Image 2" loading="lazy">
+    <img src="../images/3.webp" alt="Fashion Editorial 2024 - Image 3" loading="lazy">
+    <img src="../images/4.webp" alt="Fashion Editorial 2024 - Image 4" loading="lazy">
+    <img src="../images/16.webp" alt="Fashion Editorial 2024 - Image 5" loading="lazy">
+    <img src="../images/17.webp" alt="Fashion Editorial 2024 - Image 6" loading="lazy">
+    <img src="../images/18.webp" alt="Fashion Editorial 2024 - Image 7" loading="lazy">
+    <img src="../images/19.webp" alt="Fashion Editorial 2024 - Image 8" loading="lazy">
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="mailto:info@wissamsader.com">INFO@WISSAMSADER.COM</a>
+    &nbsp;&nbsp;I&nbsp;&nbsp;
+    <a href="/about/">ABOUT</a>
+    &nbsp;&nbsp;I&nbsp;&nbsp;
+    <a href="https://vimeo.com/wissamsader" target="_blank">VIDEO</a>
+    &nbsp;&nbsp;I&nbsp;&nbsp;
+    © 2025 WISSAM SADER
+  </footer>
+
+  <script>
+    // Lazy loading for images
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('img[loading="lazy"]');
+      
+      if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const img = entry.target;
+              img.addEventListener('load', () => {
+                img.classList.add('loaded');
+              });
+              if (img.complete) {
+                img.classList.add('loaded');
+              }
+              observer.unobserve(img);
+            }
+          });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+      } else {
+        // Fallback for older browsers
+        images.forEach(img => {
+          img.classList.add('loaded');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

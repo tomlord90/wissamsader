@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - Wissam Sader</title>
+  <meta name="description" content="About Wissam Sader - Photographer">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      line-height: 1.4;
+      padding-bottom: 80px;
+    }
+
+    /* Header - Sticky */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      text-align: center;
+      padding: 12px 20px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .header h1 {
+      font-size: 22px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin: 0;
+    }
+
+    .header h1 a {
+      color: #000000;
+      text-decoration: none;
+    }
+
+    /* About Content */
+    .about-container {
+      padding: 70px 20px 48px;
+      max-width: none;
+      margin: 0 auto;
+    }
+
+    .about-content {
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .about-text {
+      flex: 1;
+      font-size: 14px;
+      line-height: 1.8;
+      letter-spacing: 0.02em;
+      margin-top: 3cm;
+      max-width: 30vw;
+    }
+
+    .about-text h2 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .about-text p {
+      margin-bottom: 15px;
+      font-size: 13px;
+    }
+
+    .about-image {
+      flex: 1;
+      max-width: 50%;
+      margin-top: 2cm;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .about-content {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .about-image {
+        max-width: 100%;
+      }
+
+      .about-container {
+        padding: 70px 20px 48px;
+      }
+    }
+
+    /* Footer - Sticky */
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #ffffff;
+      text-align: center;
+      padding: 16px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .footer a {
+      color: #000000;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <h1><a href="../index.html">Wissam Sader</a></h1>
+  </header>
+
+  <!-- About Content -->
+  <main class="about-container">
+    <div class="about-content">
+      <div class="about-text">
+        <p>My name is Wissam Sader, a contemporary photographer specializing in fashion, portrait, and commercial photography. With over a decade of experience across the Middle East and Europe, I have collaborated with leading fashion brands, magazines, and creative agencies.</p>
+        
+        <p>While my signature style combines technical precision with a minimalist aesthetic, I also adapt to a wide range of visual approaches depending on the project, ensuring each client's vision is met with creativity and authenticity. My expertise spans both studio and natural light, resulting in images that are refined, versatile, and visually striking.</p>
+        
+        <p>Currently based between Berlin, Stockholm, Dubai, Beirut, and Saudi Arabia.</p>
+      </div>
+      
+      <div class="about-image">
+        <img src="../images/about.webp" alt="Wissam Sader Photography" loading="lazy">
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <a href="mailto:saderwissam@gmail.com">SADERWISSAM@GMAIL.COM</a>
+    &nbsp;&nbsp;I&nbsp;&nbsp;
+    <a href="../index.html">WORK</a>
+    &nbsp;&nbsp;I&nbsp;&nbsp;
+    <a href="https://vimeo.com/wissamsader" target="_blank">VIDEO</a>
+    &nbsp;&nbsp;I&nbsp;&nbsp;
+    © 2025 WISSAM SADER
+  </footer>
+</body>
+</html>
