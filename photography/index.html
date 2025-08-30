@@ -182,9 +182,23 @@
       }
 
       .gallery-row.single .project-tile,
-      .gallery-row.double .project-tile,
       .gallery-row.triple .project-tile {
         flex: 1;
+      }
+
+      /* Make double rows stack vertically on mobile for bigger images */
+      .gallery-row.double {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .gallery-row.double .project-tile {
+        flex: 1;
+      }
+
+      /* Make single rows bigger on mobile */
+      .gallery-row.single {
+        padding: 0;
       }
 
       .gallery-row.triple {
