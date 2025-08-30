@@ -1,0 +1,3 @@
+title: Wissam Sader # Optional
+theme: none  # Disable Jekyll themes
+include: [".nojekyll"]  # Ensure the file is included
