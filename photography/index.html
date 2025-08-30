@@ -190,6 +190,16 @@
       .gallery-row.triple {
         flex-direction: column;
       }
+
+      /* Make quadruple rows display as 2x2 grid on mobile */
+      .gallery-row.quadruple {
+        flex-wrap: wrap;
+      }
+
+      .gallery-row.quadruple .project-tile {
+        flex: 0 0 calc(50% - 10px);
+        max-width: calc(50% - 10px);
+      }
     }
 
     /* Lazy loading */
