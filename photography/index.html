@@ -117,6 +117,13 @@
       transition: opacity 0.2s ease;
     }
 
+    /* Make 44.webp and 77.webp 10% smaller on desktop only */
+    .gallery-row.single .project-tile img[src="images/44.webp"],
+    .gallery-row.single .project-tile img[src="images/77.webp"] {
+      width: 90%;
+      margin: 0 auto;
+    }
+
     /* Footer - Sticky */
     .footer {
       position: fixed;
