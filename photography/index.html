@@ -214,6 +214,16 @@
         flex: 0 0 calc(50% - 10px);
         max-width: calc(50% - 10px);
       }
+
+      /* Make 5.webp, 4.webp, and 7.webp 25% bigger on mobile */
+      .gallery-row.single .project-tile img[src="images/5.webp"],
+      .gallery-row.single .project-tile img[src="images/4.webp"],
+      .gallery-row.single .project-tile img[src="images/7.webp"] {
+        width: 125%;
+        margin: 0 auto;
+        display: block;
+        transform: translateX(-10%);
+      }
     }
 
     /* Lazy loading */
