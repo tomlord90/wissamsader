@@ -243,12 +243,12 @@
         transform: translateX(-6.45%);
       }
 
-      /* Reduce gaps between specific rows on mobile */
-      .gallery-row:has(img[src="images/3.webp"]) {
+      /* Reduce gaps between specific rows on mobile - Safari compatible */
+      .gallery-row.double:nth-of-type(4) {
         margin-bottom: -20px;
       }
 
-      .gallery-row:has(img[src="images/44.webp"]) {
+      .gallery-row.single:nth-of-type(7) {
         margin-bottom: -36px;
       }
     }
@@ -313,17 +313,10 @@
         </div>
       </div>
       
-      <!-- Row 5: 1 image -->
-      <div class="gallery-row single">
-        <div class="project-tile">
-          <img src="images/11.webp" alt="" loading="lazy">
-        </div>
-      </div>
-      
       <!-- Row 6: 1 image -->
       <div class="gallery-row single">
         <div class="project-tile">
-          <img src="images/77.webp" alt="Creative Direction Project" loading="lazy">
+          <img src="images/77.webp" alt="" loading="lazy">
         </div>
       </div>
       
@@ -334,11 +327,8 @@
         </div>
       </div>
       
-      <!-- Row 8: 2 images -->
-      <div class="gallery-row double">
-        <div class="project-tile">
-          <img src="images/12.webp" alt="" loading="lazy">
-        </div>
+      <!-- Row 8: 1 image -->
+      <div class="gallery-row single">
         <div class="project-tile">
           <img src="images/16.webp" alt="" loading="lazy">
         </div>
