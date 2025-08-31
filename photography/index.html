@@ -237,6 +237,15 @@
         display: block;
         transform: translateX(-6.45%);
       }
+
+      /* Reduce gaps between specific rows on mobile */
+      .gallery-row:has(img[src="images/3.webp"]) {
+        margin-bottom: -20px;
+      }
+
+      .gallery-row:has(img[src="images/4.webp"]) {
+        margin-bottom: -36px;
+      }
     }
 
     /* Lazy loading */
