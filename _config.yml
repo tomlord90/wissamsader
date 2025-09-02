@@ -1,3 +1,4 @@
-title: Wissam Sader # Optional
-theme: none  # Disable Jekyll themes
-include: [".nojekyll"]  # Ensure the file is included
+title: Wissam Sader
+theme: none
+permalink: pretty
+include: [".nojekyll"]
