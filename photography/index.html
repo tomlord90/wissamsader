@@ -227,6 +227,11 @@
         flex-direction: column;
       }
 
+      /* Keep row 11 (31.webp, 46.webp, 47.webp) horizontal on mobile */
+      .gallery-row.triple:nth-of-type(11) {
+        flex-direction: row;
+      }
+
       /* Make quadruple rows display as 2x2 grid on mobile */
       .gallery-row.quadruple {
         flex-wrap: wrap;
@@ -367,7 +372,17 @@
         </div>
       </div>
       
-      <!-- Row 10: 3 images -->
+      <!-- Row 10: 2 images -->
+      <div class="gallery-row double">
+        <div class="project-tile">
+          <img src="images/48.webp" alt="Nature Photography" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="images/49.webp" alt="Street Art Documentation" loading="lazy">
+        </div>
+      </div>
+      
+      <!-- Row 11: 3 images -->
       <div class="gallery-row triple">
         <div class="project-tile">
           <img src="images/31.webp" alt="Corporate Headshots" loading="lazy">
@@ -377,16 +392,6 @@
         </div>
         <div class="project-tile">
           <img src="images/47.webp" alt="Celebrity Portrait Session" loading="lazy">
-        </div>
-      </div>
-      
-      <!-- Row 11: 2 images -->
-      <div class="gallery-row double">
-        <div class="project-tile">
-          <img src="images/48.webp" alt="Nature Photography" loading="lazy">
-        </div>
-        <div class="project-tile">
-          <img src="images/49.webp" alt="Street Art Documentation" loading="lazy">
         </div>
       </div>
       
