@@ -227,8 +227,8 @@
         flex-direction: column;
       }
 
-      /* Keep row 11 (31.webp, 46.webp, 47.webp) horizontal on mobile */
-      .gallery-row.triple:nth-of-type(11) {
+      /* Keep row 16 (31.webp, 46.webp, 47.webp) horizontal on mobile */
+      .gallery-row.triple:nth-of-type(16) {
         flex-direction: row;
       }
 
@@ -259,11 +259,11 @@
       }
 
       /* Reduce gaps between specific rows on mobile - Safari compatible */
-      .gallery-row.double:nth-of-type(4) {
+      .gallery-row.double:nth-of-type(9) {
         margin-bottom: -20px;
       }
 
-      .gallery-row.single:nth-of-type(7) {
+      .gallery-row.single:nth-of-type(12) {
         margin-bottom: -36px;
       }
     }
@@ -288,7 +288,51 @@
   <!-- Gallery Grid -->
   <main class="gallery">
     <div class="gallery-grid">
-      <!-- Row 1: 2 images -->
+      <!-- Row 1: 2 images (glasses) -->
+      <div class="gallery-row double">
+        <div class="project-tile">
+          <img src="images/glasses1.webp" alt="Glasses Series 1" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="images/glasses2.webp" alt="Glasses Series 2" loading="lazy">
+        </div>
+      </div>
+      
+      <!-- Row 2: 2 images (gym) -->
+      <div class="gallery-row double">
+        <div class="project-tile">
+          <img src="images/gym1.webp" alt="Gym Series 1" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="images/gym2.webp" alt="Gym Series 2" loading="lazy">
+        </div>
+      </div>
+      
+      <!-- Row 3: 1 image (modelarab1) -->
+      <div class="gallery-row single">
+        <div class="project-tile">
+          <img src="images/modelarab1.webp" alt="Model Arab Series 1" loading="lazy">
+        </div>
+      </div>
+      
+      <!-- Row 4: 1 image (modelarab2) -->
+      <div class="gallery-row single">
+        <div class="project-tile">
+          <img src="images/modelarab2.webp" alt="Model Arab Series 2" loading="lazy">
+        </div>
+      </div>
+      
+      <!-- Row 5: 2 images (door) -->
+      <div class="gallery-row double">
+        <div class="project-tile">
+          <img src="images/door1.webp" alt="Door Series 1" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="images/door2.webp" alt="Door Series 2" loading="lazy">
+        </div>
+      </div>
+      
+      <!-- Row 6: 2 images -->
       <div class="gallery-row double">
         <div class="project-tile">
           <img src="images/1.webp" alt="Fashion Editorial 2024" loading="lazy">
