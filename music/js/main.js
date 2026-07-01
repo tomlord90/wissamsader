@@ -125,6 +125,16 @@
       bindLastWord(li);
     });
 
+    /* --- footer name = scroll back to top --- */
+    var footName = document.querySelector('.foot-name');
+    if (footName) {
+      footName.style.cursor = 'pointer';
+      footName.setAttribute('title', 'Back to top');
+      footName.addEventListener('click', function () {
+        window.scrollTo(0, 0);
+      });
+    }
+
     /* --- build the filter bar in the hero --- */
     var bar = document.querySelector('.hero__tags');
     if (!bar) return;
