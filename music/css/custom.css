@@ -265,16 +265,24 @@ body#index {
   font-size: 1rem;
   line-height: 1.5;
 }
-#bio a img {
-  width: 26px !important;
-  height: 26px !important;
-  filter: grayscale(1) invert(0.85);
-  transition: filter 0.2s, transform 0.2s;
-  margin-right: 0.6rem;
-  margin-top: 1rem;
+/* social icons — clean monochrome SVGs, consistent on the dark bg */
+#bio .socials {
+  display: flex;
+  gap: 1.1rem;
+  margin-top: 1.2rem;
 }
-#bio a img:hover {
-  filter: none;
+#bio .socials a {
+  color: var(--ink-dim);
+  display: inline-flex;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+#bio .socials svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+#bio .socials a:hover {
+  color: var(--acid);
   transform: translateY(-3px);
 }
 
