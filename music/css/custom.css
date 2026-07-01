@@ -1,19 +1,21 @@
 /* ============================================================
    WISSAM SADER — sound artist
-   redesign: neo-brutalist / anti-design sonic field
+   design: analog signal / field-recording archive
+   warm black, VU-meter amber, record-light red.
+   calm, hypnotic motion — deep listening, not glitch.
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,600;0,800;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-  --bg:        #0a0a0a;
-  --bg-2:      #121212;
-  --ink:       #ededed;
-  --ink-dim:   #8a8a8a;
-  --ink-faint: #555;
-  --acid:      #d6ff2e;   /* electric lime signal */
-  --signal:    #ff3b1d;   /* alarm red */
-  --line:      #262626;
+  --bg:        #0d0b08;   /* warm black — tape, not screen */
+  --bg-2:      #161310;
+  --ink:       #ece5d8;   /* warm bone white */
+  --ink-dim:   #9d9483;
+  --ink-faint: #5d5647;
+  --acid:      #ffb000;   /* VU-meter amber */
+  --signal:    #ff3f2e;   /* record-light red */
+  --line:      #2a251c;
   --display:   'Anton', 'Arial Narrow', sans-serif;
   --sans:      'Archivo', Arial, sans-serif;
   --mono:      'Space Mono', monospace;
@@ -60,16 +62,17 @@ a:visited {
 
 .clearfix::after { content: ""; clear: both; display: table; }
 
-/* ---------- film grain + scanline overlays (every page) ---------- */
-body::before {
+/* ---------- film grain + vignette overlays (homepage only — work pages
+   keep their photos completely clean) ---------- */
+body#index::before {
   content: "";
   position: fixed;
   inset: -50%;
   z-index: 9998;
   pointer-events: none;
-  opacity: 0.06;
+  opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 0.6s steps(4) infinite;
+  animation: grain 0.7s steps(4) infinite;
 }
 @keyframes grain {
   0%   { transform: translate(0, 0); }
@@ -79,16 +82,18 @@ body::before {
   100% { transform: translate(3%, -1%); }
 }
 
-body::after {
+body#index::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9997;
   pointer-events: none;
-  /* soft vignette only — the CRT scanlines were removed (they showed up as
-     faint lines over the photos) */
   background:
     radial-gradient(130% 130% at 50% 0%, transparent 65%, rgba(0,0,0,0.28) 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body#index::before { animation: none; }
 }
 
 /* ============================================================
@@ -102,7 +107,8 @@ body#index {
 .hero {
   position: relative;
   padding: 7vh 6vw 4vh;
-  border-bottom: 2px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
 }
 .hero__kicker {
   font-family: var(--mono);
@@ -111,6 +117,22 @@ body#index {
   text-transform: uppercase;
   color: var(--acid);
   margin: 0 0 1.4rem;
+}
+/* small record-light pulse before the kicker */
+.hero__kicker::before {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+  background: var(--signal);
+  margin-right: 0.9em;
+  vertical-align: baseline;
+  animation: rec 2.6s ease-in-out infinite;
+}
+@keyframes rec {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
 }
 .hero__name {
   font-family: var(--display);
@@ -122,6 +144,7 @@ body#index {
   font-size: clamp(3.4rem, 15vw, 15rem);
   color: var(--ink);
   position: relative;
+  z-index: 1;
 }
 .hero__name span { display: block; }
 .hero__name .ln-2 {
@@ -129,36 +152,42 @@ body#index {
   -webkit-text-stroke: 1.5px var(--ink-dim);
   padding-left: 0.12em;
 }
-.hero__name:hover { animation: glitch 0.35s steps(2) 2; }
-@keyframes glitch {
-  0%   { text-shadow: 3px 0 var(--signal), -3px 0 var(--acid); }
-  50%  { text-shadow: -3px 0 var(--signal), 3px 0 var(--acid); transform: translateX(2px); }
-  100% { text-shadow: none; transform: none; }
+
+/* live waveform strip behind the lower hero */
+.hero__wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 34%;
+  min-height: 90px;
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* Touch devices can't hover — glitch the name automatically on a loop so
-   mobile gets the same animated treatment as desktop. */
-@media (hover: none) {
-  .hero__name {
-    animation: nameGlitch 7s steps(1) infinite;
-  }
+/* coordinates line — field-recording log */
+.hero__meta {
+  position: relative;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--ink-faint);
+  margin: 2.2rem 0 0;
+  text-transform: uppercase;
 }
-@keyframes nameGlitch {
-  0%, 88%, 100% { text-shadow: none; transform: none; }
-  89% { text-shadow: 3px 0 var(--signal), -3px 0 var(--acid); transform: translateX(2px); }
-  91% { text-shadow: -3px 0 var(--signal), 3px 0 var(--acid); transform: translateX(-2px); }
-  93% { text-shadow: 3px 0 var(--signal), -3px 0 var(--acid); transform: translateX(1px); }
-  95% { text-shadow: -2px 0 var(--signal), 2px 0 var(--acid); transform: translateX(-1px); }
-  97% { text-shadow: none; transform: none; }
+.hero__meta b {
+  font-weight: 400;
+  color: var(--ink-dim);
 }
+
 .hero__tags {
-  margin-top: 2rem;
+  margin-top: 1.1rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 0.6rem;
-  position: relative;   /* sit above the (positioned) hero name so every
-                           filter button stays clickable, not just the
-                           ones clear of the name */
+  position: relative;
   z-index: 2;
 }
 /* fallback styling for the static spans before JS turns them into filters */
@@ -186,6 +215,7 @@ body#index {
   display: inline-flex;
   align-items: center;
   gap: 0.5em;
+  flex: 0 0 auto;
   transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
 .filter em {
@@ -204,28 +234,31 @@ body#index {
 }
 .filter.active em { color: #000; opacity: 0.55; }
 
-/* ---------- ticker / marquee ---------- */
+/* ---------- ticker / marquee — quiet transmission strip ---------- */
 .ticker {
   overflow: hidden;
   white-space: nowrap;
-  border-bottom: 2px solid var(--line);
-  background: var(--acid);
-  color: #000;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  color: var(--acid);
 }
 .ticker__track {
   display: inline-block;
-  padding: 0.55rem 0;
-  font-family: var(--display);
-  font-size: 1.05rem;
-  letter-spacing: 0.06em;
+  padding: 0.6rem 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  animation: marquee 28s linear infinite;
+  animation: marquee 55s linear infinite;
 }
-.ticker__track span { margin: 0 1.2rem; }
+.ticker__track span { margin: 0 1.4rem; }
 .ticker__track .dot { color: var(--signal); }
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
 }
 
 /* ---------- layout grid ---------- */
@@ -241,11 +274,19 @@ body#index {
 #bio {
   width: auto;
   padding: 4vh 3vw 6vh 6vw;
-  border-right: 2px solid var(--line);
+  border-right: 1px solid var(--line);
   font-family: var(--sans);
   font-size: 0.82rem;
   line-height: 1.7;
   display: block;
+  /* stays put while the index scrolls */
+  position: sticky;
+  top: 0;
+  align-self: start;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
 #bio::before {
   content: "// BIO";
@@ -317,9 +358,9 @@ body#index {
 #performances li {
   position: relative;
   border-top: 1px solid var(--line);
-  padding: 0.85rem 0 0.85rem 4.3em;   /* room for the year column */
-  text-indent: -4.3em;                /* year hangs at the left; wrapped title
-                                         lines align under the title text */
+  padding: 0.85rem 0 0.85rem 7.6em;   /* room for the №. + year columns */
+  text-indent: -7.6em;                /* both hang left; wrapped title lines
+                                         align under the title text */
   transition: padding 0.25s ease, background 0.2s ease;
   font-family: var(--sans);
   font-size: 0.96rem;
@@ -328,17 +369,29 @@ body#index {
 }
 #performances li:last-child { border-bottom: 1px solid var(--line); }
 
+/* archive number column (added by JS) — oldest work is 001 */
+#performances li .num {
+  display: inline-block;
+  width: 3.4em;
+  text-indent: 0;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+  letter-spacing: 0.08em;
+}
+#performances li .num::after { content: " /"; opacity: 0.5; }
+#performances li:hover .num { color: var(--acid); }
+
 /* whole row is the click target for linked entries */
 #performances li.is-link { cursor: pointer; }
 #performances li.is-link a {
-  display: block;
-  margin: -0.85rem 0;
-  padding: 0.85rem 0;
+  display: inline;
 }
 
 #performances li:hover {
-  padding-left: calc(4.3em + 0.6rem);   /* keep the hanging indent, add a slide */
-  background: linear-gradient(90deg, rgba(214,255,46,0.06), transparent 60%);
+  padding-left: calc(7.6em + 0.5rem);   /* keep the hanging indent, add a slide */
+  background: linear-gradient(90deg, rgba(255,176,0,0.05), transparent 60%);
 }
 /* left accent bar on hover */
 #performances li::before {
@@ -349,7 +402,7 @@ body#index {
   background: var(--acid);
   transition: width 0.2s ease;
 }
-#performances li:hover::before { width: 5px; }
+#performances li:hover::before { width: 3px; }
 
 #performances li a,
 #performances li c {
@@ -366,10 +419,11 @@ body#index {
   font-size: 0.74rem;
   color: var(--ink-faint);
   margin-right: 0.5rem;
+  text-indent: 0;
 }
 #performances li a:hover i { color: var(--signal); }
 
-/* category tag: the .custom-word, repurposed as a bold reveal pill */
+/* category tag: the .custom-word, repurposed as a reveal pill */
 .custom-word {
   position: static;
   display: inline-block;
@@ -401,7 +455,7 @@ body#index {
 
 /* ---------- footer ---------- */
 .site-footer {
-  border-top: 2px solid var(--line);
+  border-top: 1px solid var(--line);
   padding: 4vh 6vw 6vh;
   display: flex;
   flex-wrap: wrap;
@@ -419,7 +473,9 @@ body#index {
   color: transparent;
   -webkit-text-stroke: 1px var(--ink-faint);
   margin: 0;
+  transition: -webkit-text-stroke-color 0.3s ease;
 }
+.site-footer .foot-name:hover { -webkit-text-stroke-color: var(--acid); }
 .site-footer .foot-links {
   font-family: var(--mono);
   font-size: 0.78rem;
@@ -449,22 +505,11 @@ body#index {
   background-attachment: fixed;
   min-height: 100vh;
 }
-/* light scrim: text sits on the card, so the image only needs a soft fade
-   into the card at the bottom — keep the photo bright. */
-#page-bg > div::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background:
-    linear-gradient(180deg, rgba(10,10,10,0.10) 0%, rgba(10,10,10,0.04) 30%, rgba(10,10,10,0.55) 100%);
-  pointer-events: none;
-}
+/* no scrim or overlay on the photo — the text card carries its own
+   contrast, so the image stays exactly as shot. */
 
-/* "bare" pages have no text/media — show only the background image:
-   hide the empty card and the heavy scrim. */
+/* "bare" pages have no text/media — show only the background image. */
 body.bare #page { display: none; }
-body.bare > div::before { background: none; }
 
 #page {
   position: relative;
@@ -473,7 +518,7 @@ body.bare > div::before { background: none; }
   width: min(760px, 90vw);
   margin-left: auto;
   margin-right: auto;
-  background: rgba(10,10,10,0.82);
+  background: rgba(13,11,8,0.84);
   backdrop-filter: blur(6px);
   border: 1px solid var(--line);
   border-left: 4px solid var(--acid);
@@ -569,7 +614,7 @@ body.bare > div::before { background: none; }
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--ink);
-  background: rgba(10,10,10,0.7);
+  background: rgba(13,11,8,0.7);
   border: 1px solid var(--line);
   padding: 0.5em 0.9em;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
@@ -596,25 +641,56 @@ body.bare > div::before { background: none; }
   .layout { grid-template-columns: 1fr; }
   #bio {
     position: static;
+    max-height: none;
+    overflow: visible;
     border-right: none;
-    border-bottom: 2px solid var(--line);
+    border-bottom: 1px solid var(--line);
     padding: 4vh 6vw 5vh;
   }
   #performances { padding: 5vh 6vw 8vh; }
 }
 
 @media (max-width: 768px) {
-  .hero { padding: 6vh 6vw 4vh; }
-  .hero__name {
-    font-size: clamp(2.6rem, 16vw, 7rem);
-    animation: nameGlitch 7s steps(1) infinite;   /* animate the name on phones */
+  .hero { padding: 5vh 6vw 3.5vh; }
+  .hero__name { font-size: clamp(2.6rem, 16vw, 7rem); }
+  .hero__wave { min-height: 64px; }
+  .hero__meta {
+    margin-top: 1.6rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
   }
+
+  /* filters: one swipeable row instead of a tall block of buttons */
+  .hero__tags {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-left: -6vw;
+    margin-right: -6vw;
+    padding: 0.2rem 6vw;
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
+            mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
+  }
+  .hero__tags::-webkit-scrollbar { display: none; }
+  .filter { padding: 0.55em 0.9em; }   /* comfortable tap targets */
+
+  .ticker__track { font-size: 0.64rem; }
+
   .site-footer { flex-direction: column; align-items: flex-start; }
   .site-footer .foot-links { text-align: left; }
   #page { margin-top: 65vh; }
   #page h1, #page h2 { font-size: clamp(1.25rem, 5.2vw, 1.7rem); line-height: 1.08; }
   #page #sound iframe[width="394"] { height: min(64vh, 560px); }
-  #performances li { font-size: 0.9rem; }
+
+  /* index rows: drop the archive number, keep just the year hang */
+  #performances li {
+    font-size: 0.9rem;
+    padding: 0.8rem 0 0.8rem 3.6em;
+    text-indent: -3.6em;
+  }
+  #performances li:hover { padding-left: 3.6em; }   /* no slide on touch */
+  #performances li .num { display: none; }
   body { font-size: 15px; }
 
   /* keep the full INDEX / PREV / NEXT nav on mobile, just tighter */

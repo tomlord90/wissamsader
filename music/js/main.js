@@ -85,14 +85,68 @@
       page.querySelectorAll('#info h1, #info h2').forEach(bindLastWord);
     }
 
+    /* --- HOME PAGE: slow waveform behind the hero name — a drone, not a
+           glitch. Layered sines drift; cursor position leans on the gain. --- */
+    var wave = document.querySelector('.hero__wave');
+    if (wave && wave.getContext) {
+      var wctx = wave.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var W = 0, H = 0;
+      var gain = 0.75;                       /* eased toward the cursor */
+      var targetGain = 0.75;
+      var t = Math.random() * 100;
+      var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var sizeWave = function () {
+        W = wave.clientWidth;
+        H = wave.clientHeight;
+        wave.width = W * dpr;
+        wave.height = H * dpr;
+        wctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      };
+      sizeWave();
+      window.addEventListener('resize', sizeWave);
+      window.addEventListener('pointermove', function (e) {
+        targetGain = 0.45 + (e.clientX / window.innerWidth) * 0.9;
+      }, { passive: true });
+
+      var trace = function (amp, freq, speed, alpha, lw) {
+        wctx.beginPath();
+        for (var x = 0; x <= W; x += 3) {
+          /* envelope fades the line out at both edges */
+          var env = Math.sin((x / W) * Math.PI);
+          var y = H * 0.55 +
+            Math.sin(x * freq + t * speed) *
+            Math.sin(x * freq * 0.31 - t * speed * 0.7) *
+            amp * env * gain;
+          if (x === 0) wctx.moveTo(x, y); else wctx.lineTo(x, y);
+        }
+        wctx.strokeStyle = 'rgba(255, 176, 0, ' + alpha + ')';
+        wctx.lineWidth = lw;
+        wctx.stroke();
+      };
+
+      var frame = function () {
+        wctx.clearRect(0, 0, W, H);
+        gain += (targetGain - gain) * 0.04;
+        trace(H * 0.42, 0.011, 0.55, 0.45, 1.4);
+        trace(H * 0.30, 0.019, -0.35, 0.22, 1);
+        trace(H * 0.18, 0.006, 0.22, 0.18, 1);
+        t += 0.005;
+        if (!still) requestAnimationFrame(frame);
+      };
+      frame();
+    }
+
     /* --- HOME PAGE: tag every project, make rows clickable, build filters. --- */
     var works = document.getElementById('performances');
     if (!works) return;
 
     var lis = Array.prototype.slice.call(works.querySelectorAll('li'));
     var counts = {};
+    var total = lis.length;
 
-    lis.forEach(function (li) {
+    lis.forEach(function (li, idx) {
       var existing = li.querySelector('.custom-word');
       var raw = existing ? existing.textContent.trim() : '';
       var title = li.textContent.replace(/\s+/g, ' ').trim();
@@ -111,6 +165,14 @@
         li.insertBefore(span, li.firstChild);
       }
 
+      /* archive number — list is newest-first, so the oldest work is 001.
+         Goes inside the link when there is one so it shares the row layout. */
+      var num = document.createElement('span');
+      num.className = 'num';
+      num.textContent = String(total - idx).padStart(3, '0');
+      var host = li.querySelector('a[href]') || li;
+      host.insertBefore(num, host.firstChild);
+
       /* whole row is the click target for linked entries */
       var link = li.querySelector('a[href]');
       if (link && link.getAttribute('href')) {
@@ -119,6 +181,13 @@
           if (e.target.closest('a')) return;
           window.location.href = link.getAttribute('href');
         });
+      }
+
+      /* the num + year columns already separate the title — drop the old
+         "- " prefix from the markup so rows read cleanly */
+      var yr = li.querySelector('i');
+      if (yr && yr.nextSibling && yr.nextSibling.nodeType === 3) {
+        yr.nextSibling.nodeValue = yr.nextSibling.nodeValue.replace(/^\s*-\s*/, ' ');
       }
 
       /* keep the last word of the entry from wrapping alone on its own line */
