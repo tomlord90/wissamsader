@@ -368,6 +368,8 @@ body#index {
   opacity: 0;
   max-width: 0;
   overflow: hidden;
+  text-indent: 0;          /* cancel the inherited hanging indent so the tag
+                              text isn't pushed out of its own pill */
   vertical-align: middle;
   white-space: nowrap;
   font-family: var(--mono);
