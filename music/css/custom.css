@@ -13,7 +13,8 @@
   --ink:       #ece5d8;   /* warm bone white */
   --ink-dim:   #9d9483;
   --ink-faint: #5d5647;
-  --acid:      #ffb000;   /* VU-meter amber */
+  --acid:      #e8382a;   /* print red — film leader, not VU amber */
+  --ember:     #ff7a3c;   /* warm ember for gradients */
   --signal:    #ff3f2e;   /* record-light red */
   --line:      #2a251c;
   --display:   'Anton', 'Arial Narrow', sans-serif;
@@ -33,6 +34,12 @@ body {
   padding: 0;
 }
 
+html {
+  /* the page may never lay out wider than the screen — no zoom-out on phones */
+  overflow-x: clip;
+  max-width: 100vw;
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
@@ -40,8 +47,11 @@ body {
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
+  overflow-x: clip;
+  max-width: 100vw;
 }
+
+img, video, canvas, svg { max-width: 100%; }
 
 ::selection {
   background: var(--acid);
@@ -143,6 +153,7 @@ body#index::after {
   z-index: 1;
 }
 
+
 /* quiet end of page — one line, then a small breath of empty space */
 .site-end {
   border-top: 1px solid var(--line);
@@ -166,56 +177,51 @@ body#index::after {
 }
 
 .hero__tags {
-  margin-top: 1.1rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0.6rem;
+  gap: 0.55rem 0.6rem;
   position: relative;
   z-index: 2;
+  margin: 0 0 2.6rem;
 }
 /* fallback styling for the static spans before JS turns them into filters */
 .hero__tags span {
   font-family: var(--mono);
   font-size: 0.72rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  border: 1px solid var(--line);
-  padding: 0.45em 0.85em;
-  color: var(--ink-dim);
+  letter-spacing: 0.14em;
+  padding: 0.3em 0;
+  color: var(--ink-faint);
 }
 
-/* interactive filter buttons */
+/* filters — quiet mono labels in thin small frames */
 .filter {
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--ink-dim);
-  padding: 0.45em 0.85em;
-  cursor: pointer;
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5em;
+  gap: 0.55em;
   flex: 0 0 auto;
-  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  border: 1px solid rgba(236, 229, 216, 0.15);
+  background: rgba(16, 12, 9, 0.45);
+  padding: 0.42em 0.8em;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
 .filter em {
   font-style: normal;
-  font-size: 0.6rem;
+  font-size: 0.56rem;
   color: var(--ink-faint);
 }
-.filter:hover {
-  border-color: var(--ink-dim);
-  color: var(--ink);
-}
+.filter:hover { color: var(--ink); border-color: rgba(236, 229, 216, 0.3); }
 .filter.active {
-  background: var(--acid);
-  border-color: var(--acid);
-  color: #000;
+  color: #f3e9dc;
+  border-color: rgba(236, 229, 216, 0.42);
 }
-.filter.active em { color: #000; opacity: 0.55; }
 
 /* ---------- ticker / marquee — quiet transmission strip ---------- */
 .ticker {
@@ -244,6 +250,187 @@ body#index::after {
   .ticker__track { animation: none; }
 }
 
+/* ---------- selected works — film stills ---------- */
+.selworks {
+  padding: 6vh 6vw 7vh;
+  border-bottom: 1px solid var(--line);
+}
+.selworks__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 2.2rem;
+}
+.selworks__label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--acid);
+}
+.selworks__note {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.selworks__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.swork {
+  display: block;
+  border: 1px solid var(--line);
+  background: var(--bg-2);
+  transition: border-color 0.25s ease;
+}
+.swork figure {
+  margin: 0;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.swork img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(0.72) contrast(1.06) sepia(0.14);
+  transition: filter 0.5s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+/* grain baked onto every still — these are prints, not screens */
+.swork figure::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.swork:hover { border-color: rgba(232, 56, 42, 0.55); }
+.swork:hover img {
+  filter: saturate(0.95) contrast(1.04) sepia(0.04);
+  transform: scale(1.025);
+}
+.swork__cap {
+  padding: 0.85rem 0.95rem 0.95rem;
+  border-top: 1px solid var(--line);
+}
+.swork__cap h3 {
+  margin: 0 0 0.3rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  transition: color 0.2s ease;
+}
+.swork:hover .swork__cap h3 { color: var(--acid); }
+.swork__meta {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+@media (max-width: 1080px) {
+  .selworks__grid { grid-template-columns: repeat(2, 1fr); }
+}
+/* phones: two small stills per row instead of huge single cards */
+@media (max-width: 640px) {
+  .selworks { padding: 5vh 6vw; }
+  .selworks__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .swork__cap { padding: 0.55rem 0.6rem 0.6rem; }
+  .swork__cap h3 {
+    font-size: 0.72rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.15rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .swork__meta {
+    font-size: 0.5rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* ---------- concept strip — a print in a sleeve ---------- */
+.concept {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) 1fr;
+  gap: clamp(28px, 5vw, 70px);
+  align-items: center;
+  padding: 7vh 6vw;
+  border-bottom: 1px solid var(--line);
+}
+.concept__fig {
+  margin: 0;
+  border: 1px solid rgba(236, 229, 216, 0.22);
+  padding: 10px 10px 8px;
+  background: var(--bg-2);
+}
+.concept__fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.concept__fig figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 8px;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.concept__fig figcaption i {
+  font-style: normal;
+  color: var(--signal);
+  animation: rec 2.6s ease-in-out infinite;
+}
+.concept__line {
+  margin: 0 0 1.2rem;
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 3.4vw, 2.9rem);
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+.concept__line em {
+  font-style: normal;
+  color: var(--acid);
+}
+.concept__sub {
+  margin: 0;
+  max-width: 46ch;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  line-height: 2.1;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+@media (max-width: 880px) {
+  .concept { grid-template-columns: 1fr; }
+  .concept__fig { max-width: 300px; }
+}
+
 /* ---------- layout grid ---------- */
 .layout {
   display: grid;
@@ -252,6 +439,10 @@ body#index::after {
   position: relative;
   z-index: 1;
 }
+/* grid items must be allowed to shrink below their content width,
+   or the nowrap filter row drags the whole page wider than the phone */
+.layout > * { min-width: 0; }
+.hero__tags { max-width: 100%; }
 
 /* ---------- bio column ---------- */
 #bio {
@@ -324,7 +515,7 @@ body#index::after {
   padding: 4vh 6vw 8vh 4vw;
   font-size: 1rem;
 }
-#performances > ul::before {
+#performances::before {
   content: "// INDEX OF WORKS";
   display: block;
   font-family: var(--mono);
@@ -374,7 +565,7 @@ body#index::after {
 
 #performances li:hover {
   padding-left: calc(7.6em + 0.5rem);   /* keep the hanging indent, add a slide */
-  background: linear-gradient(90deg, rgba(255,176,0,0.05), transparent 60%);
+  background: linear-gradient(90deg, rgba(232,56,42,0.07), transparent 60%);
 }
 /* left accent bar on hover */
 #performances li::before {
@@ -422,7 +613,7 @@ body#index::after {
   font-size: 0.62rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #000;
+  color: #f6ead9;
   background: var(--acid);
   padding: 0;
   margin-right: 0;
@@ -605,7 +796,7 @@ body.bare #page { display: none; }
 }
 #home:hover::after, #left:hover::after, #right:hover::after {
   background: var(--acid);
-  color: #000;
+  color: #f6ead9;
   border-color: var(--acid);
 }
 #home  { top: 1.8em; left: 1.8em; }
@@ -648,14 +839,12 @@ body.bare #page { display: none; }
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    margin-left: -6vw;
-    margin-right: -6vw;
-    padding: 0.2rem 6vw;
+    padding: 0.2rem 0;
     -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
             mask-image: linear-gradient(90deg, #000 0%, #000 88%, transparent 100%);
   }
   .hero__tags::-webkit-scrollbar { display: none; }
-  .filter { padding: 0.55em 0.9em; }   /* comfortable tap targets */
+  .filter { padding: 0.5em 0.85em 0.5em 0.6em; }
 
   .ticker__track { font-size: 0.64rem; }
 
