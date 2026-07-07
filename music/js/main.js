@@ -85,17 +85,77 @@
       page.querySelectorAll('#info h1, #info h2').forEach(bindLastWord);
     }
 
-    /* --- HOME PAGE: slow waveform behind the hero name — a drone, not a
-           glitch. Layered sines drift; cursor position leans on the gain. --- */
+    /* --- HOME PAGE: (the hero is intentionally still — no canvas element
+           ships in the markup; this block is inert unless one returns) --- */
     var wave = document.querySelector('.hero__wave');
     if (wave && wave.getContext) {
       var wctx = wave.getContext('2d');
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       var W = 0, H = 0;
-      var gain = 0.75;                       /* eased toward the cursor */
-      var targetGain = 0.75;
-      var t = Math.random() * 100;
-      var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var lx = -1, ly = -1;                  /* listener; -1 = at rest (center) */
+      var tcEl = document.querySelector('.hero__tc');
+      var INSET = 22;
+
+      var speakers = function () {
+        return [
+          { n: 'fl', x: INSET,     y: INSET },
+          { n: 'fr', x: W - INSET, y: INSET },
+          { n: 'rl', x: INSET,     y: H - INSET },
+          { n: 'rr', x: W - INSET, y: H - INSET }
+        ];
+      };
+
+      var draw = function () {
+        wctx.clearRect(0, 0, W, H);
+        var px = lx >= 0 ? lx : W / 2;
+        var py = ly >= 0 ? ly : H / 2;
+        var dmax = Math.sqrt(W * W + H * H);
+        var sp = speakers();
+        var levels = [];
+
+        for (var i = 0; i < sp.length; i++) {
+          var s = sp[i];
+          var d = Math.sqrt((px - s.x) * (px - s.x) + (py - s.y) * (py - s.y));
+          var t = 1 - d / dmax;                       /* 0 far … 1 on top */
+          levels.push(-18 * (1 - t));
+
+          /* connection line — brighter when the listener is close */
+          wctx.beginPath();
+          wctx.moveTo(px, py);
+          wctx.lineTo(s.x, s.y);
+          wctx.strokeStyle = 'rgba(255, 176, 0, ' + (0.08 + 0.42 * t * t) + ')';
+          wctx.lineWidth = 1;
+          wctx.stroke();
+
+          /* speaker */
+          wctx.fillStyle = 'rgba(255, 176, 0, ' + (0.45 + 0.5 * t * t) + ')';
+          wctx.fillRect(s.x - 3, s.y - 3, 6, 6);
+
+          /* label, tucked toward the room */
+          wctx.font = '9px "Space Mono", monospace';
+          wctx.fillStyle = 'rgba(157, 148, 131, 0.8)';
+          wctx.textAlign = s.x < W / 2 ? 'left' : 'right';
+          wctx.textBaseline = s.y < H / 2 ? 'top' : 'bottom';
+          wctx.fillText(s.n.toUpperCase(), s.x + (s.x < W / 2 ? 8 : -8), s.y + (s.y < H / 2 ? 6 : -6));
+        }
+
+        /* the listener */
+        wctx.beginPath();
+        wctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        wctx.fillStyle = 'rgba(236, 229, 216, 0.95)';
+        wctx.fill();
+        wctx.beginPath();
+        wctx.arc(px, py, 7, 0, Math.PI * 2);
+        wctx.strokeStyle = 'rgba(236, 229, 216, 0.35)';
+        wctx.lineWidth = 1;
+        wctx.stroke();
+
+        if (tcEl) {
+          tcEl.textContent = sp.map(function (s, i) {
+            return s.n + ' ' + (levels[i] <= -0.05 ? '−' : '') + Math.abs(levels[i]).toFixed(1);
+          }).join(' · ') + ' db';
+        }
+      };
 
       var sizeWave = function () {
         W = wave.clientWidth;
@@ -103,39 +163,24 @@
         wave.width = W * dpr;
         wave.height = H * dpr;
         wctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        draw();
       };
       sizeWave();
       window.addEventListener('resize', sizeWave);
-      window.addEventListener('pointermove', function (e) {
-        targetGain = 0.45 + (e.clientX / window.innerWidth) * 0.9;
-      }, { passive: true });
 
-      var trace = function (amp, freq, speed, alpha, lw) {
-        wctx.beginPath();
-        for (var x = 0; x <= W; x += 3) {
-          /* envelope fades the line out at both edges */
-          var env = Math.sin((x / W) * Math.PI);
-          var y = H * 0.55 +
-            Math.sin(x * freq + t * speed) *
-            Math.sin(x * freq * 0.31 - t * speed * 0.7) *
-            amp * env * gain;
-          if (x === 0) wctx.moveTo(x, y); else wctx.lineTo(x, y);
-        }
-        wctx.strokeStyle = 'rgba(255, 176, 0, ' + alpha + ')';
-        wctx.lineWidth = lw;
-        wctx.stroke();
-      };
-
-      var frame = function () {
-        wctx.clearRect(0, 0, W, H);
-        gain += (targetGain - gain) * 0.04;
-        trace(H * 0.42, 0.011, 0.55, 0.45, 1.4);
-        trace(H * 0.30, 0.019, -0.35, 0.22, 1);
-        trace(H * 0.18, 0.006, 0.22, 0.18, 1);
-        t += 0.005;
-        if (!still) requestAnimationFrame(frame);
-      };
-      frame();
+      var hero = document.querySelector('.hero');
+      if (hero) {
+        hero.addEventListener('pointermove', function (e) {
+          var r = wave.getBoundingClientRect();
+          lx = Math.max(0, Math.min(W, e.clientX - r.left));
+          ly = Math.max(0, Math.min(H, e.clientY - r.top));
+          draw();
+        }, { passive: true });
+        hero.addEventListener('pointerleave', function () {
+          lx = -1; ly = -1;
+          draw();
+        });
+      }
     }
 
     /* --- HOME PAGE: tag every project, make rows clickable, build filters. --- */

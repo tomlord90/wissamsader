@@ -134,32 +134,19 @@ body#index::after {
   font-family: var(--display);
   font-weight: 400;
   text-transform: uppercase;
-  line-height: 0.82;
-  letter-spacing: -0.01em;
+  line-height: 1;
+  letter-spacing: 0.02em;
   margin: 0;
-  font-size: clamp(3.4rem, 15vw, 15rem);
+  font-size: clamp(2.2rem, 5.2vw, 4.6rem);
   color: var(--ink);
   position: relative;
   z-index: 1;
 }
-.hero__name span { display: block; }
-.hero__name .ln-2 {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink-dim);
-  padding-left: 0.12em;
-}
 
-/* live waveform strip behind the lower hero */
-.hero__wave {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 34%;
-  min-height: 90px;
-  z-index: 0;
-  pointer-events: none;
+/* quiet end of page — one line, then a small breath of empty space */
+.site-end {
+  border-top: 1px solid var(--line);
+  height: 12vh;
 }
 
 /* coordinates line — field-recording log */
@@ -648,8 +635,7 @@ body.bare #page { display: none; }
 
 @media (max-width: 768px) {
   .hero { padding: 5vh 6vw 3.5vh; }
-  .hero__name { font-size: clamp(2.6rem, 16vw, 7rem); }
-  .hero__wave { min-height: 64px; }
+  .hero__name { font-size: clamp(1.9rem, 8.5vw, 3rem); }
   .hero__meta {
     margin-top: 1.6rem;
     font-size: 0.6rem;
