@@ -49,24 +49,31 @@
         /* Responsive Design */
         @media (max-width: 1200px) {
             a {
-                padding: 0 10rem;
+                padding: 0 2rem;
             }
         }
-        
+
+        /* phones + small tablets: stack the three links, keep the diagonal */
         @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                height: 100dvh;
+            }
             a {
-                padding: 0 4rem;
+                height: auto;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 0 2rem;
                 font-size: 24px;
             }
         }
-        
+
         @media (max-width: 480px) {
             a {
-                padding: 0 2rem;
                 font-size: 20px;
             }
         }
-        
+
         @media (max-width: 320px) {
             a {
                 padding: 0 1rem;
