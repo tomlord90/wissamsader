@@ -268,6 +268,55 @@
       }
     }
 
+
+    /* Still life */
+    .still .project-tile img { object-fit: cover; }
+    .still.p .project-tile img { aspect-ratio: 3 / 4; }
+    .still.l .project-tile img { aspect-ratio: 4 / 3; }
+    .chapter {
+      text-align: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-top: 24px;
+      border-top: 1px solid #000000;
+      width: 60%;
+      margin: 0 auto;
+    }
+    .switch {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .switch a { color: #000000; text-decoration: none; padding-bottom: 2px; }
+    .switch a.on { text-decoration: underline; }
+    .set { display: flex; flex-direction: column; gap: inherit; }
+    .set[hidden] { display: none; }
+    @media (min-width: 769px) {
+      .still.p.double { max-width: 75%; margin: 0 auto; width: 100%; }
+    }
+    /* Two rows left the page, so the page's div:nth-of-type mobile fixes are re-pinned by image */
+    @media (max-width: 480px) {
+      .gallery-row.double:nth-of-type(9) { margin-bottom: 0; }
+      .gallery-row.single:has(img[src="images/18.webp"]) { margin-bottom: -36px; }
+    }
+    @media (max-width: 768px) {
+      .header.with-switch { height: auto; line-height: normal; padding: 14px 0 10px; }
+      .header.with-switch h1 { line-height: 1.2; }
+      .header.with-switch .switch { margin-top: 8px; }
+      .header.with-switch ~ .gallery { margin-top: 96px; }
+      .chapter { width: 100%; }
+    }
+
+    #set-still { display: none; }
+    body.view-portrait .gallery-grid > section.still { display: none; }
+    body.view-still-life .gallery-grid > div.gallery-row,
+    body.view-still-life .gallery-grid > section.still { display: none; }
+    body.view-still-life #set-still { display: flex; }
     /* Lazy loading */
     img[loading="lazy"] {
       opacity: 0;
@@ -281,8 +330,13 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
+  <header class="header with-switch">
     <h1>Wissam Sader</h1>
+    <nav class="switch">
+      <a href="#all" data-set="all" class="on">All</a>
+      <a href="#still-life" data-set="still-life">Still life</a>
+      <a href="#portrait" data-set="portrait">Portrait</a>
+    </nav>
   </header>
 
   <!-- Gallery Grid -->
@@ -298,23 +352,17 @@
         </div>
       </div>
       
-      <!-- Row 3: 1 image (modelarab1) -->
-      <div class="gallery-row single">
+      <section class="gallery-row triple still p">
         <div class="project-tile">
-          <img src="images/modelarab1.webp" alt="Model Arab Series 1" loading="lazy">
-        </div>
-      </div>
-      
-      <!-- Row 5: 2 images (door) -->
-      <div class="gallery-row double">
-        <div class="project-tile">
-          <img src="images/door1.webp" alt="Door Series 1" loading="lazy">
+          <img src="still-life/01-gloved-hand-handbag.webp" alt="Gloved hand placing a black leather handbag on a plinth" loading="lazy">
         </div>
         <div class="project-tile">
-          <img src="images/door2.webp" alt="Door Series 2" loading="lazy">
+          <img src="still-life/05-handbag-hand-shadow-red.webp" alt="Leather handbag on red with a reaching hand" loading="lazy">
         </div>
-      </div>
-      
+        <div class="project-tile">
+          <img src="still-life/03-gloved-hand-handbag-3.webp" alt="Gloved hand with a textured leather handbag" loading="lazy">
+        </div>
+      </section>
       <!-- Row 6: 2 images -->
       <div class="gallery-row double">
         <div class="project-tile">
@@ -325,6 +373,11 @@
         </div>
       </div>
       
+      <section class="gallery-row single still l">
+        <div class="project-tile">
+          <img src="still-life/21-sunglasses-palm-shadow-2.webp" alt="Tortoiseshell sunglasses with green lenses under palm shadows" loading="lazy">
+        </div>
+      </section>
       <!-- Row 2: 1 image -->
       <div class="gallery-row single">
         <div class="project-tile" >
@@ -332,6 +385,14 @@
         </div>
       </div>
       
+      <section class="gallery-row double still p">
+        <div class="project-tile">
+          <img src="still-life/06-camel-duffel-tonal.webp" alt="Camel leather weekender on an ochre set" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/08-hobo-bag-niche.webp" alt="Suede hobo bag on a stool in a plaster niche" loading="lazy">
+        </div>
+      </section>
       <!-- Row 3: 3 images -->
       <div class="gallery-row triple">
         <div class="project-tile">
@@ -345,6 +406,14 @@
         </div>
       </div>
       
+      <section class="gallery-row double still l">
+        <div class="project-tile">
+          <img src="still-life/15-sneaker-cobalt.webp" alt="White sneaker on a terracotta plinth against cobalt" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/13-sneakers-terracotta-steps.webp" alt="Cream leather sneakers on terracotta steps" loading="lazy">
+        </div>
+      </section>
       <!-- Row 4: 2 images -->
       <div class="gallery-row double">
         <div class="project-tile">
@@ -355,6 +424,17 @@
         </div>
       </div>
       
+      <section class="gallery-row triple still p">
+        <div class="project-tile">
+          <img src="still-life/22-lipstick-hand.webp" alt="Hand holding a red lipstick against yellow" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/29-moka-pot-mint-orange.webp" alt="Stovetop espresso maker on mint and orange" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/12-bottle-pink-sage.webp" alt="Sage water bottle on a pink plinth" loading="lazy">
+        </div>
+      </section>
       <!-- Row 6: 1 image -->
       <div class="gallery-row single">
         <div class="project-tile">
@@ -362,6 +442,11 @@
         </div>
       </div>
       
+      <section class="gallery-row single still l">
+        <div class="project-tile">
+          <img src="still-life/30-straw-hat-sea.webp" alt="Straw hat above the sea" loading="lazy">
+        </div>
+      </section>
       <!-- Row 7: 1 image -->
       <div class="gallery-row single">
         <div class="project-tile">
@@ -369,6 +454,14 @@
         </div>
       </div>
       
+      <section class="gallery-row double still p">
+        <div class="project-tile">
+          <img src="still-life/23-vase-pool-water.webp" alt="Ceramic vase standing in pool water" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/28-heels-cracked-mirror.webp" alt="Black satin heels on a cracked mirror" loading="lazy">
+        </div>
+      </section>
       <!-- Row 8: 3 images -->
       <div class="gallery-row triple">
         <div class="project-tile">
@@ -382,6 +475,14 @@
         </div>
       </div>
       
+      <section class="gallery-row double still p">
+        <div class="project-tile">
+          <img src="still-life/11-serum-light-beam.webp" alt="Amber serum bottle in a beam of light" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/26-candle-arch-niche.webp" alt="Candle in a plaster arch niche" loading="lazy">
+        </div>
+      </section>
       <!-- Row 9: 2 images -->
       <div class="gallery-row double">
         <div class="project-tile">
@@ -392,6 +493,14 @@
         </div>
       </div>
       
+      <section class="gallery-row double still l">
+        <div class="project-tile">
+          <img src="still-life/19-whisky-caustics.webp" alt="Whisky glasses casting amber light" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/14-espresso-shutters.webp" alt="Espresso by shuttered window light" loading="lazy">
+        </div>
+      </section>
       <!-- Row 9: 1 image -->
       <div class="gallery-row single">
         <div class="project-tile">
@@ -399,6 +508,17 @@
         </div>
       </div>
       
+      <section class="gallery-row triple still p">
+        <div class="project-tile">
+          <img src="still-life/24-silk-scarf-wind.webp" alt="Silk scarf in the wind" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/04-bag-fabric-membrane.webp" alt="Black shoulder bag in front of a fabric membrane" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/25-silk-scarf-wind-2.webp" alt="Striped silk scarf against blue sky" loading="lazy">
+        </div>
+      </section>
       <!-- Row 10: 2 images -->
       <div class="gallery-row double">
         <div class="project-tile">
@@ -409,6 +529,11 @@
         </div>
       </div>
       
+      <section class="gallery-row single still l">
+        <div class="project-tile">
+          <img src="still-life/32-walnut-chair-room.webp" alt="Walnut lounge chair in a sunlit room" loading="lazy">
+        </div>
+      </section>
       <!-- Row 11: 3 images -->
       <div class="gallery-row triple">
         <div class="project-tile">
@@ -422,6 +547,20 @@
         </div>
       </div>
       
+      <section class="gallery-row quadruple still p">
+        <div class="project-tile">
+          <img src="still-life/02-gloved-hand-handbag-2.webp" alt="Gloved hand lifting a black leather handbag" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/07-camel-duffel-tonal-2.webp" alt="Camel leather weekender in raking light" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/10-speaker-limestone-2.webp" alt="Speaker on a travertine plinth" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/27-candle-arch-niche-2.webp" alt="Amber glass candle in a niche" loading="lazy">
+        </div>
+      </section>
       <!-- Row 12: 4 images -->
       <div class="gallery-row quadruple">
         <div class="project-tile">
@@ -438,6 +577,14 @@
         </div>
       </div>
       
+      <section class="gallery-row double still l">
+        <div class="project-tile">
+          <img src="still-life/16-sneaker-cobalt-2.webp" alt="White sneaker against deep blue" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/17-wallet-pen-desk.webp" alt="Leather wallet and fountain pen" loading="lazy">
+        </div>
+      </section>
       <!-- Row 13: 4 images -->
       <div class="gallery-row quadruple">
         <div class="project-tile">
@@ -453,6 +600,138 @@
           <img src="images/37.webp" alt="Texture Explorations" loading="lazy">
         </div>
       </div>
+      
+      <section class="gallery-row double still l">
+        <div class="project-tile">
+          <img src="still-life/20-sunglasses-palm-shadow.webp" alt="Tortoiseshell sunglasses under palm shadows" loading="lazy">
+        </div>
+        <div class="project-tile">
+          <img src="still-life/33-walnut-chair-room-2.webp" alt="Walnut chair in morning light" loading="lazy">
+        </div>
+      </section>
+      
+      <section class="set" id="set-still">
+        <section class="gallery-row triple still p">
+          <div class="project-tile">
+            <img src="still-life/01-gloved-hand-handbag.webp" alt="Gloved hand placing a black leather handbag on a plinth" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/02-gloved-hand-handbag-2.webp" alt="Gloved hand lifting a black leather handbag" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/03-gloved-hand-handbag-3.webp" alt="Gloved hand with a textured leather handbag" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still l">
+          <div class="project-tile">
+            <img src="still-life/21-sunglasses-palm-shadow-2.webp" alt="Tortoiseshell sunglasses with green lenses under palm shadows" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/20-sunglasses-palm-shadow.webp" alt="Tortoiseshell sunglasses under palm shadows" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still p">
+          <div class="project-tile">
+            <img src="still-life/06-camel-duffel-tonal.webp" alt="Camel leather weekender on an ochre set" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/07-camel-duffel-tonal-2.webp" alt="Camel leather weekender in raking light" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row triple still p">
+          <div class="project-tile">
+            <img src="still-life/05-handbag-hand-shadow-red.webp" alt="Leather handbag on red with a reaching hand" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/08-hobo-bag-niche.webp" alt="Suede hobo bag on a stool in a plaster niche" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/04-bag-fabric-membrane.webp" alt="Black shoulder bag in front of a fabric membrane" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still l">
+          <div class="project-tile">
+            <img src="still-life/15-sneaker-cobalt.webp" alt="White sneaker on a terracotta plinth against cobalt" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/16-sneaker-cobalt-2.webp" alt="White sneaker against deep blue" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row single still l">
+          <div class="project-tile">
+            <img src="still-life/13-sneakers-terracotta-steps.webp" alt="Cream leather sneakers on terracotta steps" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row triple still p">
+          <div class="project-tile">
+            <img src="still-life/22-lipstick-hand.webp" alt="Hand holding a red lipstick against yellow" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/29-moka-pot-mint-orange.webp" alt="Stovetop espresso maker on mint and orange" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/12-bottle-pink-sage.webp" alt="Sage water bottle on a pink plinth" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still p">
+          <div class="project-tile">
+            <img src="still-life/10-speaker-limestone-2.webp" alt="Speaker on a travertine plinth" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/11-serum-light-beam.webp" alt="Amber serum bottle in a beam of light" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still p">
+          <div class="project-tile">
+            <img src="still-life/26-candle-arch-niche.webp" alt="Candle in a plaster arch niche" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/27-candle-arch-niche-2.webp" alt="Amber glass candle in a niche" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row single still l">
+          <div class="project-tile">
+            <img src="still-life/30-straw-hat-sea.webp" alt="Straw hat above the sea" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still p">
+          <div class="project-tile">
+            <img src="still-life/24-silk-scarf-wind.webp" alt="Silk scarf in the wind" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/25-silk-scarf-wind-2.webp" alt="Striped silk scarf against blue sky" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still p">
+          <div class="project-tile">
+            <img src="still-life/23-vase-pool-water.webp" alt="Ceramic vase standing in pool water" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/28-heels-cracked-mirror.webp" alt="Black satin heels on a cracked mirror" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still l">
+          <div class="project-tile">
+            <img src="still-life/32-walnut-chair-room.webp" alt="Walnut lounge chair in a sunlit room" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/33-walnut-chair-room-2.webp" alt="Walnut chair in morning light" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row double still l">
+          <div class="project-tile">
+            <img src="still-life/14-espresso-shutters.webp" alt="Espresso by shuttered window light" loading="lazy">
+          </div>
+          <div class="project-tile">
+            <img src="still-life/17-wallet-pen-desk.webp" alt="Leather wallet and fountain pen" loading="lazy">
+          </div>
+        </section>
+        <section class="gallery-row single still l">
+          <div class="project-tile">
+            <img src="still-life/19-whisky-caustics.webp" alt="Whisky glasses casting amber light" loading="lazy">
+          </div>
+        </section>
+      </section>
     </div>
   </main>
 
@@ -464,7 +743,7 @@
     &nbsp;&nbsp;I&nbsp;&nbsp;
     <a href="https://vimeo.com/wissamsader" target="_blank">VIDEO</a>
     &nbsp;&nbsp;I&nbsp;&nbsp;
-    © 2025 WISSAM SADER
+    © 2026 WISSAM SADER
   </footer>
 
   <script>
@@ -496,6 +775,26 @@
         });
       }
     });
+  </script>
+
+  <script>
+    // All / Portrait / Still life. The hash keeps a direct link to each view.
+    (function () {
+      const links = document.querySelectorAll('.switch a');
+      function show(name) {
+        document.body.className = 'view-' + name;
+        links.forEach(a => a.classList.toggle('on', a.dataset.set === name));
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+          if (img.complete) img.classList.add('loaded'); else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+        });
+        window.scrollTo(0, 0);
+      }
+      links.forEach(a => a.addEventListener('click', e => {
+        e.preventDefault(); history.replaceState(null, '', '#' + a.dataset.set); show(a.dataset.set);
+      }));
+      const h = location.hash.slice(1);
+      show(['portrait', 'still-life'].includes(h) ? h : 'all');
+    })();
   </script>
 </body>
 </html>
