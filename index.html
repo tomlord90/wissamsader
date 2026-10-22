@@ -43,6 +43,12 @@
     .row { display: flex; justify-content: space-between; align-items: baseline; }
     .name { letter-spacing: 0.3em; }
     .links { display: flex; gap: 28px; }
+    /* Laptop and up: Music and Photography together on the left, Studiomorphik alone on the right */
+    @media (min-width: 769px) {
+      .links { width: 100%; }
+      .links .l-photo { order: 2; }
+      .links .l-studio { order: 3; margin-left: auto; }
+    }
     .links a { color: var(--dim); transition: color 0.2s ease; }
     .links a:hover { color: var(--red); }
     .meta { color: var(--dim); }
